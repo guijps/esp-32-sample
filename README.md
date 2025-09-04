@@ -23,5 +23,9 @@ Node B – Human-Machine Interface (ESP32)
   Can display system status or feedback.
 
 Communication Layer
-A shared and abstract communication interface was developed to support multiple communication protocols, such as: I2C, Bluetooth, MQTT. By utilizing an abstract base class, new protocols can be easily integrated or swapped with minimal code changes, ensuring flexibility and modularity.
+A shared and abstract communication interface was developed to support multiple communication protocols, such as: I2C, Bluetooth, MQTT. By utilizing an abstract base class, new protocols can be easily integrated or swapped with minimal code changes, ensuring flexibility and modularity.7
+
+
+reference : 
+reference : https://www.youtube.com/watch?v=Jl4O4bERVnw to hoz to use the Relay
 
