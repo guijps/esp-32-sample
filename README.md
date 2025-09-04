@@ -29,3 +29,13 @@ A shared and abstract communication interface was developed to support multiple 
 reference : 
 reference : https://www.youtube.com/watch?v=Jl4O4bERVnw to hoz to use the Relay
 
+Circuit:
+P2-> Resistor 10kOhm -> Base NPN transistor
+Relay IN -> COllectior NPN transistor
+GND* -> Resistor 10kOhm -> Emmitter NPN Transistor
+
+Relay VCC -> ESP32 VIN
+Relay GND -> GND*
+
+* Use the same ground
+
