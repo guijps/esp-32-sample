@@ -1,4 +1,5 @@
- Embedded IoT System with ESP32 & Labrador (Caninos Loucos)
+#Project in PAUSE, not finished
+Embedded IoT System with ESP32 & Labrador (Caninos Loucos)
 This project showcases a modular and distributed embedded IoT system using ESP32 microcontrollers and the Labrador platform developed by Caninos Loucos.
 
 System Overview
@@ -27,7 +28,7 @@ A shared and abstract communication interface was developed to support multiple 
 
 
 reference : 
-reference : https://www.youtube.com/watch?v=Jl4O4bERVnw to hoz to use the Relay
+reference : https://www.youtube.com/watch?v=Jl4O4bERVnw to how to use the Relay
 
 Circuit:
 P2-> Resistor 10kOhm -> Base NPN transistor
