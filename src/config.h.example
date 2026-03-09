@@ -1,0 +1,11 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+// WiFi credentials
+const char* ssid_net    = "YOUR_WIFI_SSID";
+const char* password    = "YOUR_WIFI_PASSWORD";
+
+// MQTT broker IP address
+const char* mqtt_server = "YOUR_MQTT_BROKER_IP";
+
+#endif // CONFIG_H

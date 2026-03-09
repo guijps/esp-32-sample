@@ -1,24 +1,54 @@
+#include "config.h"
 #include <Arduino.h>
+#include "../lib/communication/mqtt_communication.h"
+//mosquitto_sub -h 10.205.246.137 -t "#" -v
+// Pin constants
+const int sensorPin = 34;
+const int ledPin = 5;
 
-// Define the analog input pin (GPIO 34 is input-only and good for analog read)
-const int analogPin = 32;
+// Light sensor variables
+int lightInit;
+int lightVal;
 
-void setup() {
-  // Start the serial communication at 115200 baud
-  Serial.begin(115200);
 
-  // Optional: wait for serial to initialize
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB
-  }
+
+MQTTCommunication mqtt(ssid_net, password, mqtt_server);
+
+void mqttCallback(char* topic, byte* payload, unsigned int length) {
+  char msg[length + 1];
+  memcpy(msg, payload, length);
+  msg[length] = '\0';
+  Serial.print("Received [");
+  Serial.print(topic);
+  Serial.print("]: ");
+  Serial.println(msg);
+  mqtt.storeLastMessage(msg);
 }
 
-void loop() {
-  // Read the analog value (0 - 4095 for 12-bit resolution)
-  int analogValue = analogRead(analogPin);
+void setup()
+{
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(115200);
+  Serial.println("Connecting to WiFi...");
+  lightInit = analogRead(sensorPin);
+  mqtt.setCallback(mqttCallback);
+  mqtt.initialize();
+  Serial.println("WiFi and MQTT connected!");
+}
 
-  // Print the value to the Serial Monitor
-  Serial.print("Analog value: ");
-  Serial.println(analogValue);
-  delay(500);
+void loop()
+{
+  mqtt.loop();
+
+  static unsigned long lastSend = 0;
+  unsigned long now = millis();
+  if (now - lastSend >= 1000) {
+    lightVal = analogRead(sensorPin);
+    char msg[32];
+    snprintf(msg, sizeof(msg), "%d", lightVal);
+    mqtt.sendData(msg);
+    Serial.print("Sent to MQTT: ");
+    Serial.println(msg);
+    lastSend = now;
+  }
 }
